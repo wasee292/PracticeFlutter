@@ -41,7 +41,11 @@ class _HomePageState extends State<HomePage> {
                   child: Text(
                     displayExOh[index],
 //                    index.toString(),
-                    style: TextStyle(color: Colors.white, fontSize: 40),
+                    style: TextStyle(
+                        color: displayExOh[index] == 'O'
+                            ? Colors.blue
+                            : Colors.red,
+                        fontSize: 40),
                   ),
                 ),
               ),
@@ -151,5 +155,6 @@ class _HomePageState extends State<HomePage> {
 
   void clearGrid() {
     for (int i = 0; i < 9; i++) displayExOh[i] = '';
+    ohTurn = true;
   }
 }
