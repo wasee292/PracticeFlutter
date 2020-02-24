@@ -56,11 +56,13 @@ class _HomePageState extends State<HomePage> {
 
   void _tapped(int index) {
     setState(() {
-      if (ohTurn && displayExOh[index] == '')
+      if (ohTurn && displayExOh[index] == '') {
         displayExOh[index] = 'O';
-      else if (displayExOh[index] == '') displayExOh[index] = 'X';
-
-      ohTurn = !ohTurn;
+        ohTurn = !ohTurn;
+      } else if (displayExOh[index] == '') {
+        displayExOh[index] = 'X';
+        ohTurn = !ohTurn;
+      }
       _checkWinner();
     });
   }
