@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -25,32 +27,36 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[800],
-      body: GridView.builder(
-          itemCount: 9,
-          gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-          itemBuilder: (BuildContext context, int index) {
-            return GestureDetector(
-              onTap: () {
-                _tapped(index);
-              },
-              child: Container(
-                decoration:
-                    BoxDecoration(border: Border.all(color: Colors.grey[700])),
-                child: Center(
-                  child: Text(
-                    displayExOh[index],
+      body: Container(
+        height: getDimen(context),
+        width: getDimen(context),
+        child: GridView.builder(
+            itemCount: 9,
+            gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            itemBuilder: (BuildContext context, int index) {
+              return GestureDetector(
+                onTap: () {
+                  _tapped(index);
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey[700])),
+                  child: Center(
+                    child: Text(
+                      displayExOh[index],
 //                    index.toString(),
-                    style: TextStyle(
-                        color: displayExOh[index] == 'O'
-                            ? Colors.blue
-                            : Colors.red,
-                        fontSize: 40),
+                      style: TextStyle(
+                          color: displayExOh[index] == 'O'
+                              ? Colors.blue
+                              : Colors.red,
+                          fontSize: 40),
+                    ),
                   ),
                 ),
-              ),
-            );
-          }),
+              );
+            }),
+      ),
     );
   }
 
@@ -158,5 +164,21 @@ class _HomePageState extends State<HomePage> {
   void clearGrid() {
     for (int i = 0; i < 9; i++) displayExOh[i] = '';
     ohTurn = true;
+  }
+
+  Size screenSize(BuildContext context) {
+    return MediaQuery.of(context).size;
+  }
+
+  double screenHeight(BuildContext context, {double dividedBy = 1}) {
+    return screenSize(context).height / dividedBy;
+  }
+
+  double screenWidth(BuildContext context, {double dividedBy = 1}) {
+    return screenSize(context).width / dividedBy;
+  }
+
+  double getDimen(BuildContext context) {
+    return min(screenHeight(context), screenWidth(context));
   }
 }
